@@ -1,0 +1,84 @@
+{% extends 'base.html'%}
+
+{% block title %}
+	Склад
+{% endblock %}
+
+{%block url_static_css%}
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/warehouse.css')}}">
+{%endblock%}
+
+{%block url_static_js%}
+	<script type="text/javascript" src="{{ url_for('static', filename='js/warehousePageScripts.js')}}" defer></script>
+{%endblock%}
+
+{% block content %}
+	
+	<div class="header">
+		<div class="header_logo"><img src="{{ url_for('static', filename='img/br_logo.jpg') }}"></div>
+		<div class="current_user_name"><a href="{{url_for('home_user_page')}}">{{ current_user_name }}</a></div>
+		<div class="links_block">
+			<a href="{{url_for('chat')}}"><div class="main_char_link">Общий чат</div></a>
+			<div class="schedule_link">График смен</div>
+			<div class="warehouse_link"><a href="{{url_for('warehouse')}}">Склад</a></div>
+			{% if is_admin %}
+			<a href="{{url_for('create_new_user')}}"><div class="create_new_user">Создать аккаунт сотрудника</div></a>
+			{% endif %}
+			<div class="logout">
+				<form action="{{url_for('logout')}}" method="POST">
+					<input type="hidden" name="logout_token" value="{{logout_token}}">
+					<button type="submit" class="btn" id="btn_logout">Выйти из аккаунта</button>
+				</form>
+				
+			</div>
+		</div>
+		
+	</div>
+
+	<div class="warehouse_block">
+		<div class="div_menu_btns">
+			<div class="menu_btn menu_all_prod menu_btn_active">Весь товар</div>
+			<div class="menu_btn menu_discounted">Уценка</div>
+		</div>
+	</div>
+
+
+	<div class="all_products warehouse_block">
+		<div class="products_block_wrapper">
+			{% for product in all_product_list %}
+			<div class="product_block">
+				<div class="product_id">{{ product[0] }}</div>
+				<div class="product_title">{{ product[1] }}</div> 
+				<div class="product_count">Количество: {{ product[2] }} шт</div> 
+				<div class="date_for_off date_off_danger">Конец срока годности: {{ product[3] }}</div>
+				<div class="btn_for_discount"><button class="off_product_btn">Удалить со склада</button></div>
+			</div>
+			{% endfor %}
+		</div>
+		
+
+		<div class="add_product_block">
+			<div><span>Название товара:</span> <input type="text" id="inp_product_title"></div>
+			<div><span>Количество</span> <input type="text" id="inp_product_count"></div>
+			<div><span>Конец срока годности:</span><input type="text" id="inp_date_for_off" placeholder="дд-мм-гггг"> </div>
+			<div><button id="add_product_btn">Добавить</button></div>
+		</div>
+
+	</div>
+
+
+
+
+	<div class="discounted_products warehouse_block">
+		{% for product in all_discounted_product_list %}
+		<div class="discounted_product_block">
+			<div class="product_title">{{ product[1] }}</div> 
+			<div class="product_count">Количество: {{ product[2] }} шт</div>
+			<div class="product_discount">Скидка 30%</div>
+			<div class="date_for_off">Конец срока годности: {{ product[3] }}</div>
+			<div class="btn_for_off"><button class="off_product_btn">>Списать товар</button></div>
+		</div>
+		{% endfor %}
+	</div>
+
+{% endblock %}

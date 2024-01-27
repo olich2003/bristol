@@ -1,0 +1,25 @@
+﻿{% extends 'base.html'%}
+
+{% block title %}
+	WH - Приветствуем вас!
+{% endblock %}
+
+{%block url_static_css%}
+<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/hello.css')}}">
+{%endblock%}
+
+{%block url_static_js%}
+<script type="text/javascript" src="{{ url_for('static', filename='js/helloScripts.js')}}" defer></script>
+{%endblock%}
+
+{% block content %}
+
+	<div id="welcome_text">
+		Добро пожаловать, этот проект разработан для выпускной квалифицированной работы. Разработчик - Потапова О. А.
+	</div>
+
+	<div id="log_wrap">
+		<div class="btn" id="login"><a href="{{url_for('enter')}}">Авторизация</a></div>
+	</div>
+
+{% endblock %}

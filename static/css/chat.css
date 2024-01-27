@@ -1,0 +1,72 @@
+
+
+
+.chat_stage {
+  margin: 50px auto;
+  max-width: 550px;
+  font: 15px arial, sans-serif;
+  background-color: white;
+  border-style: solid;
+  border-width: 1px;
+  padding-top: 20px;
+  padding-bottom: 25px;
+  padding-right: 25px;
+  padding-left: 25px;
+  box-shadow: 5px 5px 5px grey;
+  border-radius: 15px;
+  background-color: red;
+
+}
+
+#msg_box{
+	height: 300px;
+  background-color: white;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.item_msg {
+   font: 15px arial, sans-serif;
+   padding-top: 5px; 
+}
+.msg_time{
+	float: right;
+	color: #5374af;
+}
+#chatbox {
+  font: 17px arial, sans-serif;
+  height: 22px;
+  width: 444px;
+  border-radius: 10px;
+  border: 0px;
+  padding: 3px;
+}
+
+.chat_stage input {
+	margin-top: 5px;
+}
+
+
+#small_down_icon{
+   position: relative;
+    margin-bottom: -70px;
+    top: -90px;
+    left: 470px;
+    opacity: 0.7;
+    transition: 0.5s;
+}
+#small_down_icon:hover{
+  opacity: 0.9;
+  cursor: pointer;
+}
+
+
+
+#btn_send_msg{
+  display: inline-block;
+  padding: 5px;
+  font-family: monospace;
+  font-size: 1.1em;
+  border-radius: 5px;
+  cursor: pointer;
+}

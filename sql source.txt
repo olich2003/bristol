@@ -1,0 +1,99 @@
+PageContoller
+	--- Отвечает за отображение страниц.
+
+UserController
+	--- Отвечает за любое взаимодействие с логикой пользователя.
+
+ChatController
+	--- Отвечает за любое взаимодействие с логикой чата.
+
+
+БД.
+create table IF NOT EXISTS users (
+id_user int (10) AUTO_INCREMENT,
+name varchar(20) NOT NULL,
+login varchar(50) NOT NULL UNIQUE,
+password varchar(64) NOT NULL,
+date_reged datetime NOT NULL,
+role varchar(13) NOT NULL,
+color_in_chat VARCHAR(50) NOT NULL,
+PRIMARY KEY (id_user),
+FOREIGN KEY (role) REFERENCES roles (name)
+);
+ ALTER TABLE users ADD COLUMN color_in_chat VARCHAR(50) NOT NULL;
+
+
+create table IF NOT EXISTS roles (
+role_id int(3) AUTO_INCREMENT,
+name varchar(20) NOT NULL UNIQUE,
+PRIMARY KEY (role_id)
+);
+
+
+
+create table IF NOT EXISTS msg_storage (
+id_msg int (10) AUTO_INCREMENT,
+from_user_id int(10) NOT NULL,
+message text NOT NULL,
+date_sent date NOT NULL,
+PRIMARY KEY (id_msg),
+FOREIGN KEY (from_user_id) REFERENCES users (id_user) 
+);
+
+
+
+
+### СКЛАД ###
+
+create table IF NOT EXISTS warehouse (
+prod_id int(10) AUTO_INCREMENT,
+title varchar(20) NOT NULL,
+count int(10) NOT NULL,
+date_for_off date NOT NULL,
+status varchar(20) NOT NULL,
+PRIMARY KEY (prod_id)
+);
+
+
+
+insert into warehouse (title, count, date_for_off, status)
+VALUES 
+	('Coca-cola', 20, STR_TO_DATE("10-17-2021", "%m-%d-%Y"), 'product'),
+	('J7', 10, STR_TO_DATE("10-07-2024", "%m-%d-%Y"), 'product'),
+	('Mentos', 100, STR_TO_DATE("05-11-2024", "%m-%d-%Y"), 'discount');
+
+
+UPDATE warehouse SET status = '{new_status}' WHERE prod_id = {prod_id};
+
+
+
+
+Добавление ролей
+insert into roles(name) 
+VALUES 
+('user'),
+('admin');
+
+
+insert into users(name, login, password, date_reged, role)
+VALUES 
+('Имя Фамилия', 'user1', '77d9d48d2ac6ca6fff103f5f87d3c05531349e8ba805ea88dbd76e266a9cd16f', now(), 'user'),
+('Name Surname', 'admin1', '750ac79b05b8246dfc4de67dd77f37c39da1b37114870766d5de886bc67d9c1c', now(), 'admin');
+
+
+
+UPDATE users SET color_in_chat = 'red' WHERE id_user = 1';
+
+
+
+
+
+
+
+
+Запрос для получения всех сообщений из бд.
+SELECT u.id_user, u.name, m.message, DATE_FORMAT(m.date_sent, '%H:%i %d.%m'), u.color_in_chat FROM users AS u INNER JOIN msg_storage AS m ON u.id_user=m.from_user_id ORDER BY m.id_msg
+
+
+
+

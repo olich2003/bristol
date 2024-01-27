@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>{% block title %}
+				
+	{% endblock %}</title>
+
+
+	<link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/header.css')}}">
+	{%block  url_static_css%}{%endblock%}
+	
+
+	<script src="http://ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js" ></script>
+	{%block  url_static_js%}{%endblock%}
+
+</head>
+<body>
+
+{% block content %}
+	
+{% endblock %}
+</body>
+</html>
