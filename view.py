@@ -43,6 +43,11 @@ def chat():
 	return controllers.PageController().call(page='chat_page')
 
 
+@app.route('/about_page')
+def about_page():
+	return render_template('about_page.html')
+
+
 @app.route('/warehouse')
 def warehouse():
 	return controllers.PageController().call(page='warehouse_page')

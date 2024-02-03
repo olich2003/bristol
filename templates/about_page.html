@@ -1,0 +1,70 @@
+{% extends 'base.html'%}
+
+{% block title %}
+  Справка - WH
+{% endblock %}
+
+{%block url_static_css%}
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/user.css')}}">
+  
+  <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/chat.css')}}">
+{%endblock%}
+
+{%block url_static_js%}
+
+{%endblock%}
+
+{% block content %}
+  
+  <div class="header">
+    <div class="header_logo"><img src="{{ url_for('static', filename='img/br_logo.jpg') }}"></div>
+    <a href="{{url_for('home_user_page')}}"><div class="current_user_name">{{ current_user_name }}</div></a>
+    <div class="links_block">  
+      <div class="main_char_link">Общий чат</div>
+      <div class="schedule_link">График смен</div>
+      <div class="warehouse_link"><a href="{{url_for('warehouse')}}">Склад</a></div>
+      {% if is_admin %}
+      <a href="{{url_for('create_new_user')}}"><div class="create_new_user">Создать аккаунт сотрудника</div></a>
+      {% endif %}
+      <div class="about_link"><a href="">Справка</a></div>
+      <div class="logout">
+        <form action="{{url_for('logout')}}" method="POST">
+          <input type="hidden" name="logout_token" value="{{logout_token}}">
+          <button type="submit" class="btn" id="btn_logout">Выйти из аккаунта</button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="chat_stage">
+      <div class="about_textbox">
+          <h3>Добро пожаловать в приложение для автоматизации работы магазина.</h3><br>
+
+        <span><strong>Общая информация.</strong><br>
+        Здесь вы можете хранить данные о сроках годности вашего товара,писать заметки и у каждого есть своя учетная запись.
+        Чтобы выйти из приложения, в правом верхнем углу есть кнопка "Выйти из аккаунта".</span><br><br>
+
+        <span><strong>Раздел 1. Авторизация</strong><br>
+        Администратор приложения выдает логины и пароли всем сотрудникам магазина.
+        Если вы забыли пароль или логин, обратитесь к администратору.</span><br><br>
+
+        <span><strong>Раздел 2. Заметки</strong><br>
+        Всю важную информацию, вы можете оставлять в приложение.Вкладка "Заметки", далее в появившемся окне напишите сообщение и нажмите кнопку отправить.</span><br><br>
+
+        <span><strong>Раздел 3. График смен</strong><br>
+        Здесь вы можете вносить ваш график работы и дополнительные смены. Если возникнет ситуация, когда нужно определить кто работал в определенный день, можно обратиться к таблице графика смен.
+        Или же чтобы после получения расчетных листов сравнить, верно ли вам произведет расчет заработной платы.</span><br><br>
+
+        <span><strong>Раздел 4. Склад</strong><br>
+        Здесь вы ведете учет остаточного срока годности.
+        "Весь товар" - добавляете товар из той группы товаров, которая чаще остается просроченным. Весь товар в магазине добавлять не нужно, так как это время затратно и не имеет смысла. 
+        Можно добавлять такие категории,  как скоропорт, снеки, кондитерские изделия и редко покупаемые товары.
+        В этой вкладке, вы увидели что у товара закончится срок годности, вы подаете на уценку в 1С.Предприятие.Так же добавляете уже во вкладку "Уценка".</span><br><br>
+
+        <span>Если у вас возникнут дополнительные вопросы, можете задать их по почте Po1apovaO@gmail.com</span>
+      </div>
+       
+    </div>
+    
+  </div>
+{% endblock %}
